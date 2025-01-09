@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Search</title>
+</head>
+<body>
+    <h1>Search Documents</h1>
+    <input type="text" id="searchQuery" placeholder="Enter search query" />
+    <button onclick="search()">Search</button>
+    <div id="results"></div>
+    <script>
+        async function search() {
+            const query = document.getElementById('searchQuery').value;
+            const response = await fetch(`/search/?query=${encodeURIComponent(query)}`);
+            const data = await response.json();
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = JSON.stringify(data.result, null, 2);
+        }
+    </script>
+</body>
+</html>
