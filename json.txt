@@ -1,0 +1,11 @@
+CREATE TABLE documents (
+    id SERIAL PRIMARY KEY,
+    data JSONB
+);
+
+INSERT INTO documents (data) 
+VALUES ('{"title": "Пациент Иванов", "description": "Средней тяжести"}'),
+       ('{"title": "Пациент Петров", "description": "Тяжелое состояние"}'),
+       ('{"title": "Пациент Сидоров", "description": "Выписан"}');
+
+CREATE INDEX gin_index_on_data ON documents USING GIN (data jsonb_path_ops);
